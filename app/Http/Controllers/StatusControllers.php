@@ -75,7 +75,7 @@ class StatusControllers extends Controller
     {
         $request->validate([
 
-            'Invoice' => 'required',
+            'Invoice' => 'required|unique:statuses|max:50',
             'NamaBarang' => 'required',
             'SerialNumber' => 'required',
             'NamaCustomer' => 'required',

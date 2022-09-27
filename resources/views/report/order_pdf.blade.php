@@ -23,7 +23,7 @@
             </tr>
         </thead>
         <tbody>
-            @php $total = 0; @endphp
+            {{-- @php $total = 0; @endphp --}}
             @forelse ($trx as $row)
             <tr>
                 <td><strong>{{ $row->status->Invoice }}</strong></td>

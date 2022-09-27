@@ -76,6 +76,7 @@
                 <input type="text" name="Email" class="form-control" value="{{ $state->Email }}" placeholder="Email">
             </div>
         </div>
+        @endhasrole
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Kerusakan:</strong>
@@ -100,7 +101,7 @@
                 <input type="text" name="Ket" class="form-control" value="{{ $state->Ket }}" placeholder="Keterangan">
             </div>
         </div>
-        @endhasrole
+
         {{-- @hasrole('teknisi')
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
