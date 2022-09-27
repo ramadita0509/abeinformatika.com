@@ -1,0 +1,11 @@
+Invoice,RMA,NamaBarang,SerialNumber,NamaCustomer,Alamat,Tlp,Email,Kerusakan,Kelengkapan,Ket,Garansi,Sparepart,Status,NamaTeknisi,Remark,TglMasuk,TglKeluar
+INV-0000001,RMA-0001,Asus A5321,GC2123141555,Indra Irawan,Tasikmalaya,08623141512,indra@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000002,RMA-0002,Asus A5322,GC2123141566,Alif,Tasikmalaya,08623141512,Alif@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000003,RMA-0003,Asus A5323,GC2123141577,Candra,Tasikmalaya,08623141512,Candra@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000004,RMA-0004,Asus A53244,GC2123141588,Asep,Tasikmalaya,08623141512,Asep@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000005,RMA-0005,Asus A53234,GC2123141599,Ahmad,Tasikmalaya,08623141512,Ahmad@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000006,RMA-0006,Asus A5312312,GC2123141600,Juned,Tasikmalaya,08623141512,Juned@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000007,RMA-0007,Asus A5321123,GC2123141611,Ikhsan,Tasikmalaya,08623141512,Ikhsan@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000008,RMA-0008,Asus A532123123,GC2123141622,Andri,Tasikmalaya,08623141512,Andri@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+INV-0000009,RMA-0009,Asus A5321231,GC2123141633,Erick,Tasikmalaya,08623141512,Erick@gmail.com,Mati Total,Battery,Baret,2022-09-05,-,In Progress,Iwan,Replace Keyboard,2022-09-15,2022-09-30
+
