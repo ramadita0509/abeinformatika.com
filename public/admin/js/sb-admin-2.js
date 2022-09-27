@@ -53,5 +53,19 @@
     e.preventDefault();
   });
 
+  $(document).ready(function() {
+    let start = moment().startOf('month')
+    let end = moment().endOf('month')
+
+    $('#exportpdf').attr('href', '/order/pdf/' + start.format('YYYY-MM-DD') + '+' + end.format('YYYY-MM-DD'))
+
+    $('#created_at').daterangepicker({
+        startDate: start,
+        endDate: end
+    }, function(first, last) {
+        $('#exportpdf').attr('href', '/order/pdf/' + first.format('YYYY-MM-DD') + '+' + last.format('YYYY-MM-DD'))
+    })
+})
+
 
 })(jQuery); // End of use strict

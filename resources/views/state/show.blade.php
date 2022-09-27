@@ -34,6 +34,9 @@
                 </div>
             </div>
         </div>
+        <div class="text center">
+          <p><h2 align="center">Tanda Terima Service</h2>
+        </div>
 
         <br><br>
         <div class="row">

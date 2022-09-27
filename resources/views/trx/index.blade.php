@@ -65,6 +65,7 @@
             @foreach ($trx as $i => $item)
             <tr>
                 <td class="text-center">{{ ++$i }}</td>
+
                 <td>{{ $item->status->Invoice}} </td>
                 <td>{{ $item->status->NamaBarang}}</td>
                 <td>{{ $item->status->SerialNumber}}</td>

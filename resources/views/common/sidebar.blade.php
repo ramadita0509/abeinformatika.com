@@ -128,7 +128,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Laporan Servis & Keuangan</h6>
                     <a class="collapse-item" href="{{ route('trx.index2') }}">Laporan Transaksi Servis</a>
-                    <a class="collapse-item" href="{{ route('invoice') }}">Laporan Keuangan</a>
+                    <a class="collapse-item" href="{{ route('report.order') }}">Laporan Periode</a>
                 </div>
             </div>
         </li>

@@ -121,6 +121,8 @@ Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name(
    Route::put('/users/update/{user}', [UserController::class, 'update'])->name('update');
    Route::delete('/users/delete/{user}', [UserController::class, 'delete'])->name('destroy');
    Route::get('/users/update/status/{user_id}/{status}', [UserController::class, 'updateStatus'])->name('status');
+   Route::get('/order', [App\Http\Controllers\TransaksiControllers::class, 'orderReport'])->name('report.order');
+   Route::get('/order/pdf/{daterange}', [App\Http\Controllers\TransaksiControllers::class, 'orderReportPdf'])->name('report.order_pdf');
 
  });
 
@@ -152,6 +154,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::put('/users/update/{user}', [UserController::class, 'update'])->name('update');
     Route::delete('/users/delete/{user}', [UserController::class, 'delete'])->name('destroy');
     Route::get('/users/update/status/{user_id}/{status}', [UserController::class, 'updateStatus'])->name('status');
+    Route::get('/order', [App\Http\Controllers\TransaksiControllers::class, 'orderReport'])->name('report.order');
+    Route::get('/order/pdf/{daterange}', [App\Http\Controllers\TransaksiControllers::class, 'orderReportPdf'])->name('report.order_pdf');
 
 
 
@@ -192,6 +196,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
  Route::get('/iocallreport/export-file/{type}',[App\Http\Controllers\StatusControllers::class, 'export'])->name('export-file');
  Route::post('/upload-status', [App\Http\Controllers\StatusControllers::class, 'uploadStatus'])->name('state.upload');
  Route::get('/import-status', [App\Http\Controllers\StatusControllers::class, 'importStatus'])->name('state.import');
+ Route::get('/order', [App\Http\Controllers\TransaksiControllers::class, 'orderReport'])->name('report.order');
+ Route::get('/order/pdf/{daterange}', [App\Http\Controllers\TransaksiControllers::class, 'orderReportPdf'])->name('report.order_pdf');
 
 
 

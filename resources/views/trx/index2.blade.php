@@ -49,6 +49,7 @@
             <tr>
                 <th width="20px" class="text-center">No</th>
                 <th width="280px"class="text-center">No Invoice</th>
+                <th width="280px"class="text-center">No RMA</th>
                 <th width="280px"class="text-center">Nama Barang</th>
                 <th width="280px"class="text-center">Serial Number</th>
                 <th width="280px"class="text-center">Nama Customer</th>
@@ -65,6 +66,7 @@
             <tr>
                 <td class="text-center">{{ ++$i }}</td>
                 <td>{{ $item->status->Invoice}} </td>
+                <td>{{ $item->status->RMA}} </td>
                 <td>{{ $item->status->NamaBarang}}</td>
                 <td>{{ $item->status->SerialNumber}}</td>
                 <td>{{ $item->status->NamaCustomer }}</td>

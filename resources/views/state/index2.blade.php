@@ -48,6 +48,7 @@
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <tr>
             <th width="20px" class="text-center">No</th>
+            <th width="280px"class="text-center">ID</th>
             <th width="280px"class="text-center">No Servis</th>
             <th width="280px"class="text-center">No RMA</th>
             <th width="280px"class="text-center">Nama Barang</th>
@@ -69,6 +70,7 @@
         @foreach ($state as $i => $item)
         <tr>
             <td class="text-center">{{ ++$i }}</td>
+            <td>{{ $item->id }}</td>
             <td>{{ $item->Invoice }}</td>
             <td>{{ $item->RMA }}</td>
             <td>{{ $item->NamaBarang }}</td>
