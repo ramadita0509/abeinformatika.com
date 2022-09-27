@@ -190,6 +190,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
  Route::get('/import-transaksi', [App\Http\Controllers\TransaksiControllers::class, 'importTransaksi'])->name('trx.import');
  Route::post('/upload-transaksi', [App\Http\Controllers\TransaksiControllers::class, 'uploadTransaksi'])->name('trx.upload');
  Route::get('/iocallreport/export-file/{type}',[App\Http\Controllers\StatusControllers::class, 'export'])->name('export-file');
+ Route::post('/upload-status', [App\Http\Controllers\StatusControllers::class, 'uploadStatus'])->name('state.upload');
+ Route::get('/import-status', [App\Http\Controllers\StatusControllers::class, 'importStatus'])->name('state.import');
 
 
 

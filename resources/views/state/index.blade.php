@@ -32,6 +32,11 @@
         <a href="{{ route('export-file', ['type'=>'xls']) }}" class="btn btn-sm btn-success">
             <i class="fas fa-check"></i> Export To Excel
         </a>
+        @hasrole('admin')
+        <a href="{{ route('state.import') }}" class="btn btn-sm btn-success">
+            <i class="fas fa-check"></i> Upload Data Servis
+        </a>
+        @endhasrole
     </form>
 <br>
 <br>

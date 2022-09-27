@@ -6,7 +6,7 @@
 <div class="row justify-content-center">
 
     <div class="text-center mt-5">
-        <h1 class="text-white">ASUS Authorized Service Center Tasikmalaya</h1>
+        <h1 class="text-white">CV.ABE INFORMATIKA</h1>
     </div>
 
     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -14,7 +14,7 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                    <div class="col-lg-6 d-lg-block bg-login-image"></div>
                     <div class="col-lg-6">
                         <div class="p-5">
                             <div class="text-center">
@@ -69,7 +69,9 @@
     </div>
 
     <div class="text-center mt-5">
-        <h6 class="text-white">Developed By : ASUS Authorized Service Center Tasikmalaya</a></h6>
+        <h6 class="text-white">Developed By : CV.ABE INFORMATIKA</a></h6>
+        <br>
+        <br>
     </div>
 
 </div>

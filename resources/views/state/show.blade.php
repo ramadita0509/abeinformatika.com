@@ -20,16 +20,22 @@
     <div class="container" id="app">
         <div class="row">
             <div class="col-12">
+              <br><br>
                 <div class="float-left">
-                    <h2 class="noPrint"> Show Data Servis</h2>
+                  <figure>
+                    <img class="logo" src="{{asset('images/abe-informatika2.jpg')}}" alt="">
+                  </figure>
                 </div>
                 <div class="float-right">
-                    <a class="noPrint btn btn-secondary" href="{{ route('state.index') }}"> Back</a>
+                  <h2 class="title">ABE INFORMATIKA</h2>
+                  <span>Jl. Ibrahim Adjie No.3a, Indihiang, Kec. Indihiang, Tasikmalaya</span>
+                  <span class="line"></span>
+                  <a class="phone">(0265) 7520857</a><hr>
                 </div>
             </div>
         </div>
 
-        <br><br><br>
+        <br><br>
         <div class="row">
             <div class="col-sm-5 col-md-6">
                 <div class="form-group">
@@ -62,7 +68,7 @@
             </div>
         </div>
         <br>
-        <div class="table">
+        <div class="table third">
                <table style="width:100%" class="table-bordered">
                   <tr>
                     <th>Nama Barang : </th>
@@ -98,17 +104,20 @@
                   </tr>
                 </table>
         </div>
-            <div class="col-sm-5 col-md-6">
-            <div class="form-group">
-              <tr>
-                <td colspan="2"></td>
-                <td colspan="2"><p align="center">{{ $state->NamaCustomer}} <br> <br> <br> <br> <hr></p> </td>
-                <td colspan="2"><p align="center">Customer Service <br> <br> <br> <br> <hr></p> </td>
-              </tr>
-             </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+              <div class="float-left">
+                  <h5> {{ $state->NamaCustomer}}</h5> <br> <br> <br> <br> <hr>
+              </div>
+              <div class="float-right">
+                <h5> Customer Service</h5> <br> <br> <br> <br> <hr>
+              </div>
+          </div>
         </div>
       </div>
   </div>
+  <br><br>
  <script src="{{ mix('js/app.js') }}"></script>
  <link href="{{asset('css/app.css')}}" rel="stylesheet">
 

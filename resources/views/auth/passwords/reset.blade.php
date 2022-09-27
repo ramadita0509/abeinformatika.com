@@ -30,7 +30,7 @@
                                     @csrf
 
                                     <input type="hidden" name="token" value="{{ $token }}">
-                                    
+
                                     <div class="form-group">
                                         <input id="email" type="email"
                                             class="form-control form-control-user @error('email') is-invalid @enderror"
@@ -75,7 +75,7 @@
         </div>
 
         <div class="text-center mt-5">
-            <h6 class="text-white">Developed By : <a class="text-white" href="https://techtoolindia.com">TechTool India</a></h6>
+            <h6 class="text-white">Developed By : <a class="text-white" href="#">TechTool </a></h6>
         </div>
 
     </div>
