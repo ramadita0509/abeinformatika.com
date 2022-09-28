@@ -201,10 +201,6 @@ class StatusControllers extends Controller
 
         return Excel::download(new StatusExport, 'status.xlsx');
     }
-   // public function export()
-  //  {
-   //     return Excel::download(new StatusExport, 'status.xlsx');
-  //  }
 
     /**
     * Import Status
