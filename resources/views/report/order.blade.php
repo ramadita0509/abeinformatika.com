@@ -31,6 +31,14 @@
                             @if (session('error'))
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
+                            <form>
+                                <a href="{{ route('trx.export') }}" class="btn btn-sm btn-success">
+                                    <i class="fas fa-check"></i> Export Transaksi
+                                </a>
+                                <a href="{{ route('export-file', ['type'=>'xls']) }}" class="btn btn-sm btn-success">
+                                    <i class="fas fa-check"></i> Export Data Servis
+                                </a>
+                            </form>
 
                             <form action="{{ route('report.order') }}" method="get">
                                 <div class="input-group mb-3 col-md-4 float-right">

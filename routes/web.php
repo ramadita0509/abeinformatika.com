@@ -20,46 +20,16 @@ use App\Http\Controllers\EmployeeController;
 |
 */
 
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+// Route::get('/', function () {
+   // return redirect('welcome')->route('login'); });
+Route::get('/', [App\Http\Controllers\SiteController::class, 'index'])->name('welcome');
+Route::get('/profil', [App\Http\Controllers\SiteController::class, 'profil'])->name('site.profil');
 
 Auth::routes(['register' => false]);
 
 Auth::routes();
 
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-// Route::get('pdf/preview', [PdfController::class, 'index']);
-// Route::get('pdf/generate', [PdfController::class, 'create']);
-
-// Route::get('/', [EmployeeController::class, 'showEmployees'])->name('index');
-// Route::get('/employee/pdf', [EmployeeController::class, 'createPDF']);
-
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route::resource('state', App\Http\Controllers\StatusControllers::class);
-// Route::get('/search', [App\Http\Controllers\StatusControllers::class, 'search'])->name('search');
-// Route::get('/state/index', [App\Http\Controllers\StatusControllers::class, 'index'])->name('state');
-// Route::get('index2', [App\Http\Controllers\StatusControllers::class, 'index2'])->name('index2');
-// Route::get('/invoice', [App\Http\Controllers\StatusControllers::class, 'invoice'])->name('invoice');
-// Route::get('/nota', [App\Http\Controllers\StatusControllers::class, 'nota'])->name('nota');
-// Route::get('/iocallreport/export-file/{type}',[App\Http\Controllers\StatusControllers::class, 'export'])->name('export-file');
-
-
-// Route::get('/import-status', [App\Http\Controllers\StatusControllers::class, 'importStatus'])->name('state.import');
-// Route::post('/upload-status', [App\Http\Controllers\StatusControllers::class, 'uploadStatus'])->name('state.upload');
-
-// Route::resource('trx',App\Http\Controllers\TransaksiControllers::class);
-// Route::get('/search', [App\Http\Controllers\TransaksiControllers::class, 'search'])->name('search');
-// Route::get('export/', [App\Http\Controllers\TransaksiControllers::class, 'export'])->name('trx.export');
-// Route::get('index2', [App\Http\Controllers\TransaksiControllers::class, 'index2'])->name('trx.index2');
-
-// Route::get('/import-transaksi', [App\Http\Controllers\TransaksiControllers::class, 'importTransaksi'])->name('trx.import');
-// Route::post('/upload-transaksi', [App\Http\Controllers\TransaksiControllers::class, 'uploadTransaksi'])->name('trx.upload');
-
 
 
 // Profile Routes
@@ -105,6 +75,7 @@ Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name(
    Route::get('/invoice', [App\Http\Controllers\StatusControllers::class, 'invoice'])->name('invoice');
    Route::get('/nota', [App\Http\Controllers\StatusControllers::class, 'nota'])->name('nota');
    Route::get('/iocallreport/export-file/{type}',[App\Http\Controllers\StatusControllers::class, 'export'])->name('export-file');
+   Route::get('export/', [App\Http\Controllers\TransaksiControllers::class, 'export'])->name('trx.export');
 
    Route::get('/import-status', [App\Http\Controllers\StatusControllers::class, 'importStatus'])->name('state.import');
    Route::post('/upload-status', [App\Http\Controllers\StatusControllers::class, 'uploadStatus'])->name('state.upload');
@@ -138,6 +109,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/invoice', [App\Http\Controllers\StatusControllers::class, 'invoice'])->name('invoice');
     Route::get('/nota', [App\Http\Controllers\StatusControllers::class, 'nota'])->name('nota');
     Route::get('/iocallreport/export-file/{type}',[App\Http\Controllers\StatusControllers::class, 'export'])->name('export-file');
+    Route::get('export/', [App\Http\Controllers\TransaksiControllers::class, 'export'])->name('trx.export');
 
     Route::get('/import-status', [App\Http\Controllers\StatusControllers::class, 'importStatus'])->name('state.import');
     Route::post('/upload-status', [App\Http\Controllers\StatusControllers::class, 'uploadStatus'])->name('state.upload');
@@ -198,6 +170,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
  Route::get('/import-status', [App\Http\Controllers\StatusControllers::class, 'importStatus'])->name('state.import');
  Route::get('/order', [App\Http\Controllers\TransaksiControllers::class, 'orderReport'])->name('report.order');
  Route::get('/order/pdf/{daterange}', [App\Http\Controllers\TransaksiControllers::class, 'orderReportPdf'])->name('report.order_pdf');
+ Route::get('export/', [App\Http\Controllers\TransaksiControllers::class, 'export'])->name('trx.export');
 
 
 
