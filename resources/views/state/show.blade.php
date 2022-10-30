@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <head>
 	<title>Show Data Servis</title>
    <style>
@@ -19,30 +20,27 @@
 <body>
     <div class="container" id="app">
         <div class="row">
-            <div class="col-12">
-              <br><br>
+          <div class="col-12">
+            <br>
                 <div class="float-left">
-                  <figure>
-                    <img class="logo" src="{{asset('images/abe-informatika2.jpg')}}" alt="">
+                  <figure >
+                    <img class="logo" src="{{asset('images/abe-informatika2.jpg')}}" alt="" width="180" height="100">
                   </figure>
                 </div>
-                <div class="float-right">
-                  <h2 class="title">ABE INFORMATIKA</h2>
-                  <span>Jl. Ibrahim Adjie No.3a, Indihiang, Kec. Indihiang, Tasikmalaya</span>
-                  <span class="line"></span>
-                  <a class="phone">(0265) 7520857</a><hr>
-                </div>
+            <div class="text center">
+                 <p><h2 align="center">CV.ABE INFORMATIKA</h2>
+                 <p align="center"> Authorized Servis Partner Asus, Lenovo, Zyrex, Avita, Brother</h2>
+                 <br align="center">Jl. Ibrahim Adjie No.3a,Indihiang,Tasikmalaya Tlp: 0265-7520857, <i class="fa fa-whatsapp"></i> 085723597692</h2>
+                 <hr class="new4">
             </div>
-        </div>
-        <div class="text center">
-          <p><h2 align="center">Tanda Terima Service</h2>
+          </div>
         </div>
 
         <br><br>
         <div class="row">
             <div class="col-sm-5 col-md-6">
                 <div class="form-group">
-                    <strong>No Invoice:</strong>
+                    <strong>No Servis:</strong>
                     {{ $state->Invoice }}
                 </div>
             </div>

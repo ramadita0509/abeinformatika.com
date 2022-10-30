@@ -113,8 +113,7 @@ class StatusControllers extends Controller
     {
 
         $state = Status::find($id);
-        $update = Updates::all();
-        return view('state.edit', compact('state','update'));
+        return view('state.edit', compact('state'));
     }
 
     public function edit2(Status $state)
@@ -179,7 +178,9 @@ class StatusControllers extends Controller
     public function search(Request $request)
     {
         $keyword = $request->search;
-           $state = Status::where('SerialNumber', 'like', "%" . $keyword . "%")->paginate(5);
+           $state = Status::where('SerialNumber', 'like', "%" . $keyword . "%")
+           ->orWhere('Invoice', 'like', "%" . $keyword . "%")
+           ->orWhere('RMA', 'like', "%" . $keyword . "%")->paginate(5);
         return view('state.index',compact('state'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -219,8 +220,6 @@ class StatusControllers extends Controller
         return redirect()->route('state.index')->with('success', 'Status Imported Successfully');
 
    }
-
-
 
 
 }

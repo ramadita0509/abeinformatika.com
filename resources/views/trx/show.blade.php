@@ -2,11 +2,21 @@
 <html>
 <head>
 	<title>Invoice</title>
-	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	{{-- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'> --}}
+	{{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> --}}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('admin/css/sb-admin-2.min.css')}}" rel="stylesheet">
+
 	<!-- <link rel="stylesheet" href="sass/main.css" media="screen" charset="utf-8"/> -->
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<meta http-equiv="content-type" content="text-html; charset=utf-8">
 	<style type="text/css">
+		i{
+            font-size: 50px !important;
+            padding: 10px;
+        }
 	html, body, div, span, applet, object, iframe,
 		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 		a, abbr, acronym, address, big, cite, code,
@@ -307,19 +317,153 @@
 			padding: 0 5px;
 		}
 		footer .thanks {
-			margin-bottom: 40px;
+			margin-bottom: 0px;
+			color: #2A8EAC;
+			font-size: 1.16666666666667em;
+			font-weight: 600;
+		}
+		footer .noPrint {
+			margin-left: 1000px;
+			margin-top: 0px;
 			color: #2A8EAC;
 			font-size: 1.16666666666667em;
 			font-weight: 600;
 		}
 		footer .notice {
 			margin-bottom: 25px;
+			color: #050505;
+			font-size: 1em;
+			font-style: italic;
+			font-weight: bold;
 		}
 		footer .end {
 			padding-top: 5px;
 			border-top: 2px solid #2A8EAC;
 			text-align: center;
 		}
+		@media print {
+		.noPrint{
+		display:none;
+		}
+		footer .btn {
+		display: inline-block;
+		font-weight: 400;
+		color: #212529;
+		text-align: center;
+		vertical-align: middle;
+		-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+				user-select: none;
+		background-color: transparent;
+		border: 1px solid transparent;
+		padding: 0.375rem 0.75rem;
+		font-size: 0.9rem;
+		line-height: 1.6;
+		border-radius: 0.25rem;
+		transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		}
+		@media (prefers-reduced-motion: reduce) {
+		.btn {
+			transition: none;
+		}
+		}
+		.btn-success {
+  color: #fff;
+  background-color: #1cc88a;
+  border-color: #1cc88a;
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #17a673;
+  border-color: #169b6b;
+}
+
+.btn-success:focus, .btn-success.focus {
+  color: #fff;
+  background-color: #17a673;
+  border-color: #169b6b;
+  box-shadow: 0 0 0 0.2rem rgba(62, 208, 156, 0.5);
+}
+
+.btn-success.disabled, .btn-success:disabled {
+  color: #fff;
+  background-color: #1cc88a;
+  border-color: #1cc88a;
+}
+
+.btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active,
+.show > .btn-success.dropdown-toggle {
+  color: #fff;
+  background-color: #169b6b;
+  border-color: #149063;
+}
+
+.btn-success:not(:disabled):not(.disabled):active:focus, .btn-success:not(:disabled):not(.disabled).active:focus,
+.show > .btn-success.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(62, 208, 156, 0.5);
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #36b9cc;
+  border-color: #36b9cc;
+}
+		.btn-info {
+		color: #fff;
+		background-color: #17a2b8;
+		border-color: #17a2b8;
+		}
+		.btn-info:hover {
+		color: #fff;
+		background-color: #138496;
+		border-color: #117a8b;
+		}
+		.btn-info:focus, .btn-info.focus {
+		color: #fff;
+		background-color: #138496;
+		border-color: #117a8b;
+		box-shadow: 0 0 0 0.2rem rgba(58, 176, 195, 0.5);
+		}
+		.btn-info.disabled, .btn-info:disabled {
+		color: #fff;
+		background-color: #17a2b8;
+		border-color: #17a2b8;
+		}
+		.btn-info:not(:disabled):not(.disabled):active, .btn-info:not(:disabled):not(.disabled).active, .show > .btn-info.dropdown-toggle {
+		color: #fff;
+		background-color: #117a8b;
+		border-color: #10707f;
+		}
+
+
+		.btn-sm, .btn-group-sm > .btn {
+		padding: 0.25rem 0.5rem;
+		font-size: 0.7875rem;
+		line-height: 1.5;
+		border-radius: 0.2rem;
+		}
+
+
+		input[type=submit].btn-block,
+		input[type=reset].btn-block,
+		input[type=button].btn-block {
+		width: 100%;
+		}
+		}
+		.float-right {
+		float: right !important;
+		margin-bottom:50px
+		}
+		.float-left {
+		float: left !important;
+		}
+
+		.float-none {
+		float: none !important;
+		}
+
 
 	</style>
 </head>
@@ -331,31 +475,31 @@
 				<img class="logo" src="{{asset('images/abe-informatika2.jpg')}}" alt="">
 			</figure>
 			<div class="company-info">
-				<h2 class="title">ABE INFORMATIKA</h2>
+				<h2 class="title">CV.ABE INFORMATIKA</h2>
 				<span>Jl. Ibrahim Adjie No.3a, Indihiang, Kec. Indihiang, Tasikmalaya</span>
 				<span class="line"></span>
-				<a class="phone">(0265) 7520857</a>
+				Tlp: (0265) 7520857
+				<div class="float-right noPrint">
+					<a class="btn btn-success" href="{{ route('trx.index') }}"> Back </a>
+				</div>
 			</div>
         </div>
-
 	</header>
-
 	<section>
 
 		<div class="details clearfix">
 			<div class="client left">
 				<p>INVOICE TO:</p>
 				<p class="name">{{ $trx->status->NamaCustomer}}</p>
-				<p>
-					{{ $trx->status->Alamat}}<br>
-				</p>
-				<a href="mailto:{{ $trx->status->Email}}">{{ $trx->status->Email}}</a>
+				{{ $trx->status->Alamat}}<br>
+				<p><a href="mailto:{{ $trx->status->Email}}">{{ $trx->status->Email}}</a></p><br>
+				<p> No Service : {{ $trx->status->Invoice }}</p>
 			</div>
 			<div class="data right">
-				<div class="title">Invoice {{ $trx->status->Invoice }}</div>
+				<div class="title"> {{ $trx->Invoice }}</div>
 				<div class="date">
-					Date of Invoice: {{ $trx->status->TglMasuk}}<br>
-					Due Date: 30 Hari dari {{ $trx->status->TglMasuk}}
+					Date of Invoice: {{ $trx->status->TglKeluar}}<br>
+					Due Date: 30 Hari dari {{ $trx->status->TglKeluar}}
 				</div>
 
 			</div>
@@ -417,11 +561,13 @@
 		</div>
 	</section>
 
+
 	<footer>
 		<div class="container">
 			<div class="thanks">Thank you!</div>
+			<div class="noPrint"><a href="" button onclick="window.print()" target="_blank" class="btn btn-sm btn-info">Print </a></div>
 			<div class="notice">
-				<div>NOTICE:</div>
+				<b>Note:</b>
 				<div>Barang yang sudah dibeli tidak dapat ditukar lagi.</div>
 			</div>
 			<div class="end">Invoice was created on a computer and is valid without the signature and seal.</div>

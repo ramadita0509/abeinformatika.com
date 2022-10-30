@@ -19,6 +19,7 @@ return new class extends Migration
                     ->constrained('statuses')
                     ->onUpdate('cascade')
                     ->onDelete('cascade');
+            $table->text('Invoice');
             $table->text('BiayaServis');
             $table->text('BiayaPart');
             $table->text('HargaModal')->nullable();

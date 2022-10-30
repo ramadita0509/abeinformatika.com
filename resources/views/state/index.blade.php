@@ -46,6 +46,7 @@
             <th width="20px" class="text-center">No</th>
             <th>ID</th>
             <th>No Servis</th>
+            <th>No RMA</th>
             <th width="280px"class="text-center">Nama Barang</th>
             <th width="280px"class="text-center">Serial Number</th>
             <th width="280px"class="text-center">Nama Customer</th>
@@ -67,6 +68,7 @@
             <td class="text-center">{{ ++$i }}</td>
             <td>{{ $item->id }}</td>
             <td>{{ $item->Invoice }}</td>
+            <td>{{ $item->RMA }}</td>
             <td>{{ $item->NamaBarang }}</td>
             <td>{{ $item->SerialNumber }}</td>
             <td>{{ $item->NamaCustomer }}</td>

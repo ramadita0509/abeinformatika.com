@@ -33,9 +33,9 @@
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>No Invoice:</strong>
+                <strong>No Servis:</strong>
             <select class="form-control select2" style="width: 100;" name="id_invoice" id="id_invoice">
-                <option disabled value> Pilih Invoice </option>
+                <option disabled value> Pilih No Servis </option>
                 @foreach ($state as $item)
                 <option value="{{ $item->id }}"> {{ $item->Invoice}}</option>
                 @endforeach
@@ -44,26 +44,27 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
+                <strong>No Invoice:</strong>
+                <input class="form-control" placeholder="Invoice" name="Invoice" type="text" value="{{ $Invoice }}" id="Invoice" readonly>
+                {!! $errors->first('Invoice', "<p class='invalid-feedback'>:message</p>") !!}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
                 <strong>Biaya Servis:</strong>
-                <input type="number" name="BiayaServis" class="form-control" placeholder="Biaya Servis">
+                <input type="number" name="BiayaServis" class="form-control" id="BiayaServis" onkeyup="sum()" placeholder="Biaya Servis">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Biaya Sparepart:</strong>
-                <input type="number" name="BiayaPart" class="form-control" placeholder="Biaya Sparepart">
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Harga Modal:</strong>
-                <input type="number" name="HargaModal" class="form-control" placeholder="Harga Modal">
+                <input type="number" name="BiayaPart" class="form-control" id="BiayaPart" onkeyup="sum()" placeholder="Biaya Sparepart">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Biaya Total:</strong>
-                <input type="number" name="BiayaTotal" class="form-control" placeholder="Biaya Total">
+                <input type="number" name="BiayaTotal" class="form-control" id="BiayaTotal" onkeyup="sum()" placeholder="Biaya Total" readonly>
             </div>
         </div>
     </div>
@@ -73,4 +74,20 @@
     </div>
 </form>
 </div>
+
+<script>
+    function sum() {
+       var txtFirstNumberValue = document.getElementById('BiayaServis').value;
+       var txtSecondNumberValue = document.getElementById('BiayaPart').value;
+       if (txtFirstNumberValue == "")
+           txtFirstNumberValue = 0;
+       if (txtSecondNumberValue == "")
+           txtSecondNumberValue = 0;
+
+       var result = parseInt(txtFirstNumberValue) + parseInt(txtSecondNumberValue);
+       if (!isNaN(result)) {
+           document.getElementById('BiayaTotal').value = result;
+       }
+   }
+</script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.trx_app')
 
 @section('title', 'Transaksi')
 
@@ -51,6 +51,7 @@
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <tr>
                 <th width="20px" class="text-center">No</th>
+                <th width="280px"class="text-center">No Servis</th>
                 <th width="280px"class="text-center">No Invoice</th>
                 <th width="280px"class="text-center">Nama Barang</th>
                 <th width="280px"class="text-center">Serial Number</th>
@@ -58,7 +59,9 @@
                 <th width="280px"class="text-center">Garansi</th>
                 <th width="280px"class="text-center">Biaya Servis</th>
                 <th width="280px"class="text-center">Biaya Sparepart</th>
+                @hasrole('admin')
                 <th width="280px"class="text-center">Harga Modal</th>
+                @endhasrole
                 <th width="280px"class="text-center">Biaya Total</th>
                 <th width="280px"class="text-center">Action</th>
             </tr>
@@ -67,13 +70,16 @@
                 <td class="text-center">{{ ++$i }}</td>
 
                 <td>{{ $item->status->Invoice}} </td>
+                <td>{{ $item->Invoice}} </td>
                 <td>{{ $item->status->NamaBarang}}</td>
                 <td>{{ $item->status->SerialNumber}}</td>
                 <td>{{ $item->status->NamaCustomer }}</td>
                 <td>{{ $item->status->Garansi }}</td>
                 <td>{{ $item->BiayaServis}}</td>
                 <td>{{ $item->BiayaPart }}</td>
+                @hasrole('admin')
                 <td>{{ $item->HargaModal}}</td>
+                @endhasrole
                 <td>{{ $item->BiayaTotal}}</td>
                 <td class="text-center">
 

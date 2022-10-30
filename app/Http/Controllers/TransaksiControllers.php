@@ -55,9 +55,12 @@ class TransaksiControllers extends Controller
     public function create()
     {
 
-        $state = Status::all();
-        return view('trx.create',compact('state'));
+       // $state = Status::all();
+      //  return view('trx.create',compact('state'));
 
+        $state = Status::all();
+        $Invoice = Transaksi::Invoice();
+        return view('trx.create', compact('state'), ['Invoice' => $Invoice]);
 
       //  return view('trx.create');
     }
@@ -73,6 +76,7 @@ class TransaksiControllers extends Controller
         $request->validate([
 
             'id_invoice' => 'required|max:50|unique:transaksis,id_invoice',
+            'Invoice' => 'required',
             'BiayaServis' => 'required',
             'BiayaPart' => 'required',
         ]);
@@ -152,8 +156,12 @@ class TransaksiControllers extends Controller
     public function search(Request $request)
     {
         $keyword = $request->search;
-           $trx = Transaksi::where('id_invoice', 'like', "%" . $keyword . "%")->paginate(5);
+        $trx = Transaksi::with(['status']);
+        $trx = Transaksi::where('id_invoice', 'like', "%" . $keyword . "%")->paginate(5);
         return view('trx.index',compact('trx'))->with('i', (request()->input('page', 1) - 1) * 5);
+      //  $keyword = $request->search;
+        //   $trx = Transaksi::where('id_invoice', 'like', "%" . $keyword . "%")->paginate(5);
+       // return view('trx.index',compact('trx'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function export()

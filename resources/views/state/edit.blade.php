@@ -35,35 +35,14 @@
         <div class="row">
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
-                <strong>No Invoice:</strong>
+                <strong>No Service:</strong>
                 <input type="text" name="Invoice" value="{{ old('Invoice', $state->Invoice) }}" class="form-control" placeholder="No Invoice" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
-                <strong>Nama Barang:</strong>
-                <input type="text" name="NamaBarang" value="{{ $state->NamaBarang }}" class="form-control" placeholder="Nama Barang">
-            </div>
-        </div>
-        <div class="col-sm-5 col-md-6">
-            <div class="form-group">
-                <strong>Serial Number:</strong>
-                <input type="text" name="SerialNumber" value="{{ $state->SerialNumber }}" class="form-control" placeholder="Serial Number">
-            </div>
-        </div>
-        <div class="col-sm-5 col-md-6">
-            <div class="form-group">
-                <strong>Nama Customer:</strong>
-                <input type="text" name="NamaCustomer" value="{{ $state->NamaCustomer }}" class="form-control" placeholder="Nama Customer">
-            </div>
-        </div>
-        @endhasrole
-        @hasrole('teknisi')
-        <div class="row">
-        <div class="col-sm-5 col-md-6">
-            <div class="form-group">
-                <strong>No Invoice:</strong>
-                <input type="text" name="Invoice" value="{{ old('Invoice', $state->Invoice) }}" class="form-control" placeholder="No Invoice" disabled>
+                <strong>No RMA:</strong>
+                <input type="text" name="RMA" value="{{ old('RMA', $state->RMA) }}" class="form-control" placeholder="No RMA" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">
@@ -85,14 +64,53 @@
             </div>
         </div>
         @endhasrole
-        @hasrole('admin')
+        @hasrole('teknisi')
         <div class="row">
+            <div class="col-sm-5 col-md-6">
+                <div class="form-group">
+                    <strong>No Service:</strong>
+                    <input type="text" name="Invoice" value="{{ old('Invoice', $state->Invoice) }}" class="form-control" placeholder="No Invoice" disabled>
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-6">
+                <div class="form-group">
+                    <strong>No RMA:</strong>
+                    <input type="text" name="RMA" value="{{ old('RMA', $state->RMA) }}" class="form-control" placeholder="No RMA" disabled>
+                </div>
+            </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
-                <strong>No Invoice:</strong>
-                <input type="text" name="Invoice" value="{{ old('Invoice', $state->Invoice) }}" class="form-control" placeholder="No Invoice" disabled>
+                <strong>Nama Barang:</strong>
+                <input type="text" name="NamaBarang" value="{{ $state->NamaBarang }}" class="form-control" placeholder="Nama Barang" disabled>
             </div>
         </div>
+        <div class="col-sm-5 col-md-6">
+            <div class="form-group">
+                <strong>Serial Number:</strong>
+                <input type="text" name="SerialNumber" value="{{ $state->SerialNumber }}" class="form-control" placeholder="Serial Number" disabled>
+            </div>
+        </div>
+        <div class="col-sm-5 col-md-6">
+            <div class="form-group">
+                <strong>Nama Customer:</strong>
+                <input type="text" name="NamaCustomer" value="{{ $state->NamaCustomer }}" class="form-control" placeholder="Nama Customer" disabled>
+            </div>
+        </div>
+        @endhasrole
+        @hasrole('admin')
+        <div class="row">
+            <div class="col-sm-5 col-md-6">
+                <div class="form-group">
+                    <strong>No Service:</strong>
+                    <input type="text" name="Invoice" value="{{ old('Invoice', $state->Invoice) }}" class="form-control" placeholder="No Invoice" disabled>
+                </div>
+            </div>
+            <div class="col-sm-5 col-md-6">
+                <div class="form-group">
+                    <strong>No RMA:</strong>
+                    <input type="text" name="RMA" value="{{ old('RMA', $state->RMA) }}" class="form-control" placeholder="No RMA" disabled>
+                </div>
+            </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Nama Barang:</strong>
@@ -116,19 +134,19 @@
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Alamat:</strong>
-                <input type="text" name="Alamat" value="{{ $state->Alamat }}" class="form-control" placeholder="Alamat">
+                <input type="text" name="Alamat" value="{{ $state->Alamat }}" class="form-control" placeholder="Alamat" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>No Telepon:</strong>
-                <input type="text" name="Tlp" value="{{ $state->Tlp }}" class="form-control" placeholder="Tlp">
+                <input type="text" name="Tlp" value="{{ $state->Tlp }}" class="form-control" placeholder="Tlp" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Email:</strong>
-                <input type="text" name="Email" class="form-control" value="{{ $state->Email }}" placeholder="Email">
+                <input type="text" name="Email" class="form-control" value="{{ $state->Email }}" placeholder="Email" disabled>
             </div>
         </div>
         @endhasrole
@@ -162,25 +180,25 @@
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Kerusakan:</strong>
-                <input type="text" name="Kerusakan" class="form-control" value="{{ $state->Kerusakan }}" placeholder="Kerusakan" >
+                <input type="text" name="Kerusakan" class="form-control" value="{{ $state->Kerusakan }}" placeholder="Kerusakan" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Kelengkapan:</strong>
-                <input type="text" name="Kelengkapan" class="form-control" value="{{ $state->Kelengkapan }}" placeholder="Kelengkapan" >
+                <input type="text" name="Kelengkapan" class="form-control" value="{{ $state->Kelengkapan }}" placeholder="Kelengkapan" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Garansi:</strong>
-                <input type="date" name="Garansi" class="form-control" value="{{ $state->Garansi }}">
+                <input type="date" name="Garansi" class="form-control" value="{{ $state->Garansi }}" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Keterangan:</strong>
-                <input type="text" name="Ket" class="form-control" value="{{ $state->Ket }}" placeholder="Keterangan">
+                <input type="text" name="Ket" class="form-control" value="{{ $state->Ket }}" placeholder="Keterangan" disabled>
             </div>
         </div>
         @endhasrole
@@ -216,7 +234,7 @@
             <div class="form-group">
                 <strong>Status:</strong>
                 <select name="Status" class="form-control" value="{{ $state->Status }}">
-                    <option value ="In Progress"> In Progress</option>
+                    <option value ="In Progress" disabled> In Progress</option>
                     <option value ="Closed"> Closed</option>
                 </select>
             </div>
@@ -249,7 +267,7 @@
         <div class="col-sm-5 col-md-6">
             <div class="form-group">
                 <strong>Tanggal Masuk:</strong>
-                <input type="date" name="TglMasuk" value="{{ $state->TglMasuk }}" class="form-control" placeholder="TglMasuk">
+                <input type="date" name="TglMasuk" value="{{ $state->TglMasuk }}" class="form-control" placeholder="TglMasuk" disabled>
             </div>
         </div>
         <div class="col-sm-5 col-md-6">

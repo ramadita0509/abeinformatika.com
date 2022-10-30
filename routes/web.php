@@ -71,6 +71,7 @@ Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name(
    Route::resource('state', App\Http\Controllers\StatusControllers::class);
    Route::get('/create', [App\Http\Controllers\StatusControllers::class, 'create'])->name('state.create');
    Route::get('/search', [App\Http\Controllers\StatusControllers::class, 'search'])->name('search');
+   Route::get('/search', [App\Http\Controllers\TransaksiControllers::class, 'search'])->name('trx.search');
    Route::get('/index', [App\Http\Controllers\StatusControllers::class, 'index'])->name('state.index');
    Route::get('/invoice', [App\Http\Controllers\StatusControllers::class, 'invoice'])->name('invoice');
    Route::get('/nota', [App\Http\Controllers\StatusControllers::class, 'nota'])->name('nota');
@@ -105,6 +106,7 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::resource('state', App\Http\Controllers\StatusControllers::class);
     Route::get('/create', [App\Http\Controllers\StatusControllers::class, 'create'])->name('state.create');
     Route::get('/search', [App\Http\Controllers\StatusControllers::class, 'search'])->name('search');
+    Route::get('/trx.search', [App\Http\Controllers\TransaksiControllers::class, 'search'])->name('trx.search');
     Route::get('/index', [App\Http\Controllers\StatusControllers::class, 'index'])->name('state.index');
     Route::get('/invoice', [App\Http\Controllers\StatusControllers::class, 'invoice'])->name('invoice');
     Route::get('/nota', [App\Http\Controllers\StatusControllers::class, 'nota'])->name('nota');
@@ -140,7 +142,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/homeadmin', [App\Http\Controllers\AdminController::class, 'index'])->name('homeadmin');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/iocallreport/export-file/{type}',[App\Http\Controllers\StatusControllers::class, 'export'])->name('export-file');
-
+    Route::get('/search', [App\Http\Controllers\StatusControllers::class, 'search'])->name('search');
+    Route::get('/trx.search', [App\Http\Controllers\TransaksiControllers::class, 'search'])->name('trx.search');
     Route::resource('teknisi', App\Http\Controllers\TeknisiControllers::class);
    // Route::post('/update', [App\Http\Controllers\TeknisiControllers::class, 'update'])->name('teknisi.update');
     Route::get('index', [App\Http\Controllers\TeknisiControllers::class, 'index'])->name('teknisi.index');
@@ -171,7 +174,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
  Route::get('/order', [App\Http\Controllers\TransaksiControllers::class, 'orderReport'])->name('report.order');
  Route::get('/order/pdf/{daterange}', [App\Http\Controllers\TransaksiControllers::class, 'orderReportPdf'])->name('report.order_pdf');
  Route::get('export/', [App\Http\Controllers\TransaksiControllers::class, 'export'])->name('trx.export');
-
+ Route::get('/search', [App\Http\Controllers\StatusControllers::class, 'search'])->name('search');
+ Route::get('/trx.search', [App\Http\Controllers\TransaksiControllers::class, 'search'])->name('trx.search');
 
 
 
