@@ -28,7 +28,7 @@
 - cp .env.example .env
 - run database migration : php artisan migrate
 - run database seeder : php artisan db:seed
-# for user & password, you can find on database -> seeders -> UserSeeder
+- for user & password, you can find on database -> seeders -> UserSeeder
 ## Run Application 
 - php artisan serve
 - generate app key on dashboard
