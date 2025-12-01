@@ -27,10 +27,10 @@
 - composer install
 - cp .env.example .env
 - run database migration : php artisan migrate
-- run database seeder : php artisan db:seed
+- run database seeder : php artisan migrate:fresh --seed
 - for user & password, you can find on database -> seeders -> UserSeeder
 ## Run Application 
-- php artisan serve
+- php artisan serve --port=8002
 - generate app key on dashboard
 
 
