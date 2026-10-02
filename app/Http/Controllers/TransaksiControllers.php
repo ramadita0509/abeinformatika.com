@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use DB;
-use PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class TransaksiControllers extends Controller
 {
@@ -38,13 +38,25 @@ class TransaksiControllers extends Controller
           // return view ('trx.index',compact('trx'))->with('i', (request()->input('page', 1) -1) * 5);
     }
 
-    public function index2()
+    public function index2(Request $request)
     {
+        $bulan = $this->selectedMonth($request);
+        [$year, $month] = explode('-', $bulan);
+        $trx = Transaksi::with(['status'])
+            ->whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->orderByDesc('created_at')
+            ->paginate(5)
+            ->withQueryString();
 
-        $trx = Transaksi::with(['status']);
-        $trx = Transaksi::orderBy('created_at','desc')->paginate(5);
+        return view('trx.index2', compact('trx', 'bulan'))->with('i', ($request->input('page', 1) - 1) * 5);
+    }
 
-        return view('trx.index2')->with('trx', $trx)->with('i', (request()->input('page', 1) -1) * 5);
+    private function selectedMonth(Request $request): string
+    {
+        $bulan = (string) $request->query('bulan', now()->format('Y-m'));
+
+        return preg_match('/^\d{4}-\d{2}$/', $bulan) ? $bulan : now()->format('Y-m');
     }
 
     /**
@@ -59,8 +71,8 @@ class TransaksiControllers extends Controller
       //  return view('trx.create',compact('state'));
 
         $state = Status::all();
-        $Invoice = Transaksi::Invoice();
-        return view('trx.create', compact('state'), ['Invoice' => $Invoice]);
+
+        return view('trx.create', compact('state'));
 
       //  return view('trx.create');
     }
@@ -75,10 +87,13 @@ class TransaksiControllers extends Controller
     {
         $request->validate([
 
-            'id_invoice' => 'required|max:50|unique:transaksis,id_invoice',
-            'Invoice' => 'required',
+            'id_invoice' => 'required|max:50|unique:transaksis,id_invoice|exists:statuses,id',
             'BiayaServis' => 'required',
             'BiayaPart' => 'required',
+        ]);
+
+        $request->merge([
+            'Invoice' => Transaksi::invoiceFor(Status::findOrFail($request->id_invoice)),
         ]);
 
         Transaksi::create($request->all());
@@ -164,9 +179,11 @@ class TransaksiControllers extends Controller
        // return view('trx.index',compact('trx'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return Excel::download(new TransaksisExport, 'transaksi.xlsx');
+        $bulan = $this->selectedMonth($request);
+
+        return Excel::download(new TransaksisExport($bulan), 'transaksi-'.$bulan.'.xlsx');
     }
 
      /**
@@ -187,31 +204,39 @@ class TransaksiControllers extends Controller
 
    }
 
-   public function orderReport()
+   public function orderReport(Request $request)
     {
-        $start = Carbon::now()->startOfMonth()->format('Y-m-d H:i:s');
-        $end = Carbon::now()->endOfMonth()->format('Y-m-d H:i:s');
+        $bulan = $this->selectedMonth($request);
 
-        if (request()->date != '') {
-            $date = explode(' - ' ,request()->date);
-            $start = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
-            $end = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
-        }
-
-        $trx = Transaksi::with(['status'])->whereBetween('created_at', [$start, $end])->get();
-        return view('report.order', compact('trx'));
+        return view('report.order', [
+            'rows' => $this->laporanBulan($bulan),
+            'bulan' => $bulan,
+        ]);
     }
 
 
-    public function orderReportPdf($daterange)
+    public function orderReportPdf(string $bulan)
     {
-        $date = explode('+', $daterange);
-        $start = Carbon::parse($date[0])->format('Y-m-d') . ' 00:00:01';
-        $end = Carbon::parse($date[1])->format('Y-m-d') . ' 23:59:59';
+        if (! preg_match('/^\d{4}-\d{2}$/', $bulan)) {
+            abort(404);
+        }
 
-        $trx = Transaksi::with(['status'])->whereBetween('created_at', [$start, $end])->get();
-        $pdf = PDF::loadView('report.order_pdf', compact('trx', 'date'));
+        $rows = $this->laporanBulan($bulan);
+        $pdf = Pdf::loadView('report.order_pdf', compact('rows', 'bulan'));
+
         return $pdf->stream();
+    }
+
+    private function laporanBulan(string $bulan)
+    {
+        [$year, $month] = explode('-', $bulan);
+
+        return Status::with('transaksi')
+            ->whereYear('TglMasuk', $year)
+            ->whereMonth('TglMasuk', $month)
+            ->orderByDesc('TglMasuk')
+            ->orderByDesc('id')
+            ->get();
     }
 
 

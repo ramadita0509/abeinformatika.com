@@ -9,7 +9,6 @@ use App\Models\Status;
 use App\Models\Teknisi;
 use App\Models\Updates;
 use Laravel\Scout\Searchable;
-use DB;
 
 class Transaksi extends Model
 {
@@ -27,24 +26,17 @@ class Transaksi extends Model
 
     ];
 
-    public static function Invoice()
+    public static function invoiceFor(Status $status): string
     {
-    	$Invoice = DB::table('transaksis')->max('Invoice');
-    	$addNol = '';
-    	$Invoice = str_replace("INV/".date('dmY').'/', "", $Invoice);
-    	$Invoice = (int) $Invoice + 1;
-        $incrementInvoice = $Invoice;
+        $nomor = trim((string) $status->Invoice);
 
-    	if (strlen($Invoice) == 1) {
-    		$addNol = "000";
-    	} elseif (strlen($Invoice) == 2) {
-    		$addNol = "00";
-    	} elseif (strlen($Invoice == 3)) {
-    		$addNol = "0";
-    	}
+        if ($nomor === '') {
+            $nomor = str_pad((string) $status->id, 4, '0', STR_PAD_LEFT);
+        } elseif (ctype_digit($nomor)) {
+            $nomor = str_pad($nomor, 4, '0', STR_PAD_LEFT);
+        }
 
-    	$InvoiceBaru = "INV/".date('dmY').'/'.$addNol.$incrementInvoice;
-    	return $InvoiceBaru;
+        return 'INV/'.now('Asia/Jakarta')->format('dmY').'/'.$nomor;
     }
 
     public function status()

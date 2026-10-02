@@ -22,35 +22,38 @@ class StatusControllers extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $bulan = $this->selectedMonth($request);
+        $state = $this->serviceByMonth($bulan)->paginate(5)->withQueryString();
 
-        $state = Status::with(['updates']);
-        $state = Status::orderBy('created_at','desc')->paginate(5);
-
-       return view('state.index')->with('state', $state)->with('i', (request()->input('page', 1) -1) * 5);
+        return view('state.index', compact('state', 'bulan'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    public function index2()
+    public function index2(Request $request)
     {
+        $bulan = $this->selectedMonth($request);
+        $state = $this->serviceByMonth($bulan)->paginate(5)->withQueryString();
 
-        $state= Status::orderBy('created_at','desc')->paginate(5);
-   //     $state = Status::paginate(5)
-     //   ->orderByDesc('created_at');
-
-     //   $state = Status::all()->paginate(5);
-      return view ('state.index2',compact('state'))->with('i', (request()->input('page', 1) -1) * 5);
+        return view('state.index2', compact('state', 'bulan'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    public function index3()
+    private function selectedMonth(Request $request): string
     {
+        $bulan = (string) $request->query('bulan', now()->format('Y-m'));
 
-        $state= Status::orderBy('created_at','desc')->paginate(5);
-   //     $state = Status::paginate(5)
-     //   ->orderByDesc('created_at');
+        return preg_match('/^\d{4}-\d{2}$/', $bulan) ? $bulan : now()->format('Y-m');
+    }
 
-     //   $state = Status::all()->paginate(5);
-      return view ('state.index3',compact('state'))->with('i', (request()->input('page', 1) -1) * 5);
+    private function serviceByMonth(string $bulan)
+    {
+        [$year, $month] = explode('-', $bulan);
+
+        return Status::query()
+            ->whereYear('TglMasuk', $year)
+            ->whereMonth('TglMasuk', $month)
+            ->orderByDesc('TglMasuk')
+            ->orderByDesc('id');
     }
 
     /**
@@ -62,7 +65,9 @@ class StatusControllers extends Controller
     {
 
         $update = Updates::all();
-        return view('state.create',compact('update'));
+        $nomorServis = str_pad((string) (((int) Status::query()->selectRaw('MAX(CAST(Invoice AS UNSIGNED)) as nomor')->value('nomor')) + 1), 7, '0', STR_PAD_LEFT);
+
+        return view('state.create', compact('update', 'nomorServis'));
     }
 
     /**
@@ -75,7 +80,6 @@ class StatusControllers extends Controller
     {
         $request->validate([
 
-            'Invoice' => 'required|unique:statuses|max:50',
             'NamaBarang' => 'required',
             'SerialNumber' => 'required',
             'NamaCustomer' => 'required',
@@ -87,7 +91,10 @@ class StatusControllers extends Controller
             'TglMasuk' => 'required',
         ]);
 
-        Status::create($request->all());
+        DB::transaction(function () use ($request) {
+            $request->merge(['Invoice' => Status::nextInvoice()]);
+            Status::create($request->all());
+        });
 
         return redirect()->route('state.index')->with('succes','Data Berhasil di Input');
     }
@@ -116,12 +123,6 @@ class StatusControllers extends Controller
         return view('state.edit', compact('state'));
     }
 
-    public function edit2(Status $state)
-    {
-        return view('state.edit2', compact('state'));
-    }
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -147,21 +148,6 @@ class StatusControllers extends Controller
         return redirect()->route('state.index')->with('succes','Status Berhasil di Update');
     }
 
-    public function update2(Request $request, Status $state)
-    {
-        $request->validate([
-
-            'Status',
-
-        ]);
-
-        $state->update2($request->all());
-
-        return redirect()->route('state.index3')->with('succes','Status Berhasil di Update');
-    }
-
-
-
     /**
      * Remove the specified resource from storage.
      *
@@ -177,11 +163,18 @@ class StatusControllers extends Controller
 
     public function search(Request $request)
     {
+        $bulan = $this->selectedMonth($request);
         $keyword = $request->search;
-           $state = Status::where('SerialNumber', 'like', "%" . $keyword . "%")
-           ->orWhere('Invoice', 'like', "%" . $keyword . "%")
-           ->orWhere('RMA', 'like', "%" . $keyword . "%")->paginate(5);
-        return view('state.index',compact('state'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $state = $this->serviceByMonth($bulan)
+            ->where(function ($query) use ($keyword) {
+                $query->where('SerialNumber', 'like', '%'.$keyword.'%')
+                    ->orWhere('Invoice', 'like', '%'.$keyword.'%')
+                    ->orWhere('RMA', 'like', '%'.$keyword.'%');
+            })
+            ->paginate(5)
+            ->withQueryString();
+
+        return view('state.index', compact('state', 'bulan'))->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function invoice(Status $state)
@@ -197,10 +190,11 @@ class StatusControllers extends Controller
     }
 
 
-    public function export()
+    public function export(Request $request)
     {
+        $bulan = $this->selectedMonth($request);
 
-        return Excel::download(new StatusExport, 'status.xlsx');
+        return Excel::download(new StatusExport($bulan), 'data-servis-'.$bulan.'.xlsx');
     }
 
     /**

@@ -12,14 +12,24 @@ use Maatwebsite\Excel\Concerns\Exportable;
 // class StatusExport implements FromCollection, WithHeadingRow
 class StatusExport implements FromCollection, WithHeadings
 {
+    public function __construct(private string $bulan)
+    {
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
 
     public function collection()
    {
-      // return Status::all();
-      return Status::select('id','invoice','rma','namabarang','serialnumber','namacustomer','alamat','tlp','email','kerusakan','kelengkapan','ket','garansi','sparepart','status','namateknisi','remark','tglmasuk','tglkeluar')->get();
+      [$year, $month] = explode('-', $this->bulan);
+
+      return Status::query()
+        ->select('id','invoice','rma','namabarang','serialnumber','namacustomer','alamat','tlp','email','kerusakan','kelengkapan','ket','garansi','sparepart','status','namateknisi','remark','tglmasuk','tglkeluar')
+        ->whereYear('TglMasuk', $year)
+        ->whereMonth('TglMasuk', $month)
+        ->orderBy('TglMasuk')
+        ->get();
    }
    public function headings(): array
     {

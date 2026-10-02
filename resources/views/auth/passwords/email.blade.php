@@ -1,61 +1,31 @@
 @extends('auth.layouts.app')
 
-@section('title', 'Forgot Password')
+@section('title', 'Lupa Password')
 
 @section('content')
-<div class="row justify-content-center">
-    <div class="text-center m-5">
-        <h1 class="text-white">CV.ABE INFORMATIKA</h1>
-    </div>
+<div class="auth-card">
+    <p class="abe-kicker">Akun</p>
+    <h1 class="h3 mt-2 mb-1">Reset password</h1>
+    <p class="text-secondary mb-4">Kami kirim tautan reset ke email yang terdaftar.</p>
 
-    <div class="col-xl-10 col-lg-12 col-md-9">
+    @if (session('status'))
+        <div class="alert alert-success">{{ session('status') }}</div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                    <div class="col-lg-6">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Reset Password!</h1>
-                            </div>
-
-                            @if (session('error'))
-                                <span class="text-danger"> {{ session('error') }}</span>
-                            @endif
-
-                            <form method="POST" action="{{ route('password.email') }}">
-                                @csrf
-                                <div class="form-group">
-                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address.">
-
-                                        @error('email')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                </div>
-
-                                <button class="btn btn-primary btn-user btn-block">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="{{route('login')}}">Already know your passwrd? Login Here</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <form method="POST" action="{{ route('password.email') }}">
+        @csrf
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+            @error('email')
+                <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
         </div>
-
-    </div>
-
-    <div class="text-center mt-5">
-        <h6 class="text-white">Developed By : CV.ABE INFORMATIKA</a></h6>
-    </div>
-
+        <button class="btn btn-dark w-100" type="submit">{{ __('Send Password Reset Link') }}</button>
+    </form>
+    <p class="text-center mt-3 mb-0"><a href="{{ route('login') }}">Kembali ke halaman masuk</a></p>
 </div>
 @endsection

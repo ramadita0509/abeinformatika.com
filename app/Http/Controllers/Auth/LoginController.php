@@ -41,6 +41,12 @@ class LoginController extends Controller
 
    public function authenticated(Request $request, $user)
    {
+      cookie()->queue(cookie(
+          'auth_expires_at',
+          (string) now()->addHours(10)->getTimestamp(),
+          600
+      ));
+
       if ($user->hasRole('admin')) {
            return redirect()->route('homeadmin');
         }

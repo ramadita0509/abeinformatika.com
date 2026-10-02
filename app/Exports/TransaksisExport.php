@@ -10,12 +10,23 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class TransaksisExport implements FromCollection, WithHeadings
 {
+    public function __construct(private string $bulan)
+    {
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-      return Transaksi::select('id','id_invoice','biayaservis','biayapart','hargamodal','biayatotal')->get();
+      [$year, $month] = explode('-', $this->bulan);
+
+      return Transaksi::query()
+        ->select('id','id_invoice','biayaservis','biayapart','hargamodal','biayatotal')
+        ->whereYear('created_at', $year)
+        ->whereMonth('created_at', $month)
+        ->orderBy('created_at')
+        ->get();
     }
 
     public function headings(): array
