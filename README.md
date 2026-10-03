@@ -1,39 +1,66 @@
+# CV. ABE Informatika
 
-# pelayanan-service | Laravel 9 + Bootstrap 4
+Aplikasi pelayanan servis CV. ABE Informatika. Pengunjung bisa mengecek status barang dari halaman publik. Tim internal mencatat penerimaan, pengerjaan teknisi, invoice, dan laporan.
 
+## Yang bisa dilakukan
 
+- Halaman publik: beranda, profil, dan cek status servis lewat serial number atau nomor RMA
+- Penerimaan barang dan data servis
+- Nomor servis otomatis berurutan (`0000001`, `0000002`, …)
+- Invoice otomatis `INV/tanggal/nomor servis`
+- Laporan servis dan laporan transaksi, bisa disaring per bulan serta diekspor ke Excel atau PDF
+- Tiga peran: admin, teknisi, dan user
 
+Sesi login berlaku paling lama 10 jam. Setelah itu pengguna harus masuk lagi.
 
+## Teknologi
 
-## Features
+- PHP 8.2+
+- Laravel 12
+- MySQL
+- Blade, Bootstrap 5, Bootstrap Icons
+- Spatie Permission, Maatwebsite Excel, DomPDF
 
-- Pelayanan Service
-- Penerimaan Barang
-- Cetak Invoice
-- Laporan keuangan,dll
+## Menjalankan
 
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+```
 
-## Tech Stack
+Isi koneksi database di `.env`, lalu:
 
-**Client:** HTML, CSS, JavaScript, jQuery, VueJs, Bootstrap 4
+```bash
+php artisan migrate --seed
+php artisan serve
+```
 
-**Server:** PHP, Laravel 8
+Aplikasi terbuka di `http://127.0.0.1:8000`.
 
-**DataBase:** MySql
+`migrate:fresh --seed` menghapus seluruh data di database. Pakai hanya saat memasang dari awal.
 
+## Akun awal
 
-## Installation
-- composer update
-- composer install
-- cp .env.example .env
-- run database migration : php artisan migrate
-- run database seeder : php artisan migrate:fresh --seed
-- for user & password, you can find on database -> seeders -> UserSeeder
-## Run Application 
-- php artisan serve --port=8002
-- generate app key on dashboard
+Password semua akun seed adalah `Password`.
 
+| Peran | Email | Setelah login |
+| --- | --- | --- |
+| Admin | admin@gmail.com | `/homeadmin` |
+| User | user@gmail.com | `/homeuser` |
+| Teknisi | teknisi@gmail.com | `/hometeknisi` |
 
-## Screenshots
+## Halaman utama
 
-## pelayanan-service
+| Alamat | Isi |
+| --- | --- |
+| `/` | Beranda |
+| `/profil` | Profil perusahaan |
+| `/cek-servis` | Cek kondisi barang |
+| `/login` | Masuk panel internal |
+| `/state` | Data servis |
+| `/create` | Penerimaan barang |
+| `/index` | Laporan data servis |
+| `/trx` | Invoice |
+| `/index2` | Laporan transaksi |
+| `/order` | Laporan status, filter per bulan |
